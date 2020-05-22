@@ -1,6 +1,5 @@
 # -*- encoding: utf-8 -*-
-from flask import jsonify
-import json
+from flask_script import Manager, Server, Shell
 
 from flask_web import create_app, get_api_route
 
@@ -16,5 +15,9 @@ def register_api():
 
 app.add_url_rule("/v1/route/info", view_func=register_api, methods=["GET"])
 
+manager = Manager(app)
+
+# manager.add_command('runserver', Server(host='localhost', port='8080'))
+
 if __name__ == '__main__':
-    app.run()
+    manager.run()
