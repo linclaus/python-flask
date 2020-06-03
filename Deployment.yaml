@@ -1,31 +1,21 @@
-apiVersion: apps/v1
+apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: python-flask
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: python-flask
   template:
     metadata:
       labels:
         app: python-flask
     spec:
       containers:
-      - image: linclaus/python-flask:v0.1.0
-        imagePullPolicy: Always
-        name: python-flask
-        ports:
-        - containerPort: 8080
-          protocol: TCP
-        resources:
-          requests:
-            memory: 200Mi
-      restartPolicy: Always
-
+        - name: python-flask
+          image: linclaus/python-flask:v0.1.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -33,13 +23,11 @@ metadata:
   labels:
     app: python-flask
 spec:
+  type: ClusterIP
+  ports:
+    - name: http-metrics
+      port: 8080
+      targetPort: 8080
   selector:
     app: python-flask
-  type: NodePort
-  ports:
-  - name: port
-    nodePort: 30001
-    port: 8080
-    protocol: TCP
-    targetPort: 8080
 

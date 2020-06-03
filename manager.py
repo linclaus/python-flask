@@ -27,7 +27,7 @@ manager.add_command('shell', Shell(make_context=make_shell_context))
 # 操作数据库迁移
 manager.add_command('db', MigrateCommand)
 # 添加管理命令
-manager.add_command('runserver', Server(host='localhost', port='8080'))
+manager.add_command('runserver', Server(host='0.0.0.0', port='8080'))
 
 if __name__ == '__main__':
     manager.run()
