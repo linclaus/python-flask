@@ -10,5 +10,5 @@ RUN pip install --no-cache-dir -i https://mirrors.aliyun.com/pypi/simple -r requ
 
 COPY . /app
 
-CMD python manager.py runserver > /var/log/app.log
+CMD python manager.py runserver > /var/log/app.log 2>&1
 
