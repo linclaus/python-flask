@@ -1,6 +1,5 @@
 # -*- encoding: utf-8 -*-
 from flask import Flask
-from flask_cors import CORS
 from flask_migrate import Migrate
 
 from common.extensions import db
@@ -18,7 +17,7 @@ def create_app(config_name):
     app.config.from_object(config[config_name])
 
     _register_blueprint(app)
-    _register_extensions(app)
+    # _register_extensions(app)
 
     return app
 
